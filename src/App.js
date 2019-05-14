@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Switch, Link, Route } from 'react-router-dom';
 
-function App() {
+import './App.scss';
+
+import Home from './Home';
+import Page1 from './Page1';
+import Page2 from './Page2';
+import Page3 from './Page3';
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <BrowserRouter>
+      <header className="app-header">
+        <ul className="app-header--menu">
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/page1">Page1</Link></li>
+          <li><Link to="/page2">Page2</Link></li>
+          <li><Link to="/page3">Page3</Link></li>
+        </ul>
       </header>
-    </div>
+      <section className="app-body">
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/page1" component={Page1} />
+          <Route path="/page2" component={Page2} />
+          <Route path="/page3" component={Page3} />
+          <Route children={<div>No matched Routes</div>} />
+        </Switch>
+      </section>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
