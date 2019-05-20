@@ -42,7 +42,7 @@ class Home extends React.Component {
               ? postsDOM
               : (
                 <tr>
-                  <td colSpan={5}>로딩중.....</td>
+                  <td colSpan={5}>포스트가 존재하지 않습니다.</td>
                 </tr>
               )
           }
