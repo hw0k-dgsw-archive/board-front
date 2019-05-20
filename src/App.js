@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Link, Route } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 
-import TimeStore from './stores/TimeStore';
+import store from './stores';
 
 import Home from './Home';
 import Page1 from './Page1';
@@ -10,8 +10,6 @@ import Page2 from './Page2';
 import Page3 from './Page3';
 
 import './App.scss';
-
-let store = new TimeStore();
 
 const App = () => {
   return (
