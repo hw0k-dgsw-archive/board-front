@@ -37,7 +37,15 @@ class Home extends React.Component {
           </tr>
           </thead>
           <tbody>
-          { postsDOM }
+          {
+            posts.length > 0
+              ? postsDOM
+              : (
+                <tr>
+                  <td colSpan={5}>로딩중.....</td>
+                </tr>
+              )
+          }
           </tbody>
         </table>
       </div>
