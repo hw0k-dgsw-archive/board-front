@@ -16,14 +16,19 @@ class PostStore {
   @Observable
   posts = [];
 
+  @Observable
+  loading = false;
+
   fetchPosts = flow(function* () {
     try {
+      this.loading = true;
       const { data } = yield axios.get('http://localhost:8080/api/board/list');
       this.posts = data;
     }
     catch (err) {
       this.posts = [];
     }
+    this.loading = false;
   });
 }
 

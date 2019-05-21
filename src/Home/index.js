@@ -1,7 +1,15 @@
 import React from 'react';
 import { inject as Inject, observer as Observer } from 'mobx-react';
+import Loading from 'react-loading';
 
 import './Home.scss';
+
+const style = {
+  display: 'flex',
+  flexFlow: 'row wrap',
+  alignItems: 'center',
+  justifyContent: 'center'
+};
 
 @Inject('store')
 @Observer
@@ -11,7 +19,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const { posts } = this.props.store.PostStore;
+    const { posts, loading } = this.props.store.PostStore;
     const postsDOM = posts.map(post => (
       <tr key={post.id}>
         <td>{post.id}</td>
@@ -38,12 +46,25 @@ class Home extends React.Component {
           </thead>
           <tbody>
           {
-            posts.length > 0
-              ? postsDOM
-              : (
+            loading
+              ? (
                 <tr>
-                  <td colSpan={5}>포스트가 존재하지 않습니다.</td>
+                  <td colSpan={5} rowSpan={4}>
+                    <div style={style}>
+                      <Loading type="cubes" color="#000" />
+                    </div>
+                    로딩 중..
+                  </td>
                 </tr>
+              )
+              : (
+                posts.length > 0
+                ? postsDOM
+                : (
+                  <tr>
+                    <td colSpan={5} rowSpan={4}>포스트가 존재하지 않습니다.</td>
+                  </tr>
+                )
               )
           }
           </tbody>
